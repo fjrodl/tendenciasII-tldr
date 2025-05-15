@@ -1,3 +1,28 @@
+# 📑 Índice
+
+1. [🧠 Práctica ROS 2: Odometría Visual con Optical Flow](#-práctica-ros-2-odometría-visual-con-optical-flow)
+2. [🎯 Objetivo](#-objetivo)
+3. [📚 Motivación](#-motivación)
+4. [🔧 Pasos de desarrollo](#-pasos-de-desarrollo)
+   - [1. Crear el paquete ROS 2](#1-crear-el-paquete-ros-2)
+   - [2. Implementar el flujo óptico](#2-implementar-el-flujo-óptico)
+   - [3. Estimar odometría](#3-estimar-odometría)
+   - [4. Publicar transformaciones TF](#4-publicar-transformaciones-tf)
+   - [5. Publicar la imagen visual](#5-publicar-la-imagen-visual)
+   - [6. Filtrar el ruido de flujo óptico](#6-filtrar-el-ruido-de-flujo-óptico)
+   - [7. Visualizar en RViz](#7-visualizar-en-rviz)
+5. [📈 Limitaciones conocidas](#-limitaciones-conocidas)
+6. [🧩 Extensiones posibles](#-extensiones-posibles)
+7. [🔗 Del Flujo Óptico a la Odometría Visual y SLAM](#-del-flujo-óptico-a-la-odometría-visual-y-slam)
+   - [1️⃣ Flujo Óptico: el punto de partida](#1️⃣-flujo-óptico-el-punto-de-partida)
+   - [2️⃣ Odometría Visual: estimar el movimiento de la cámara](#2️⃣-odometría-visual-estimar-el-movimiento-de-la-cámara)
+     - [📷 ¿Cómo lo hace?](#📷-cómo-lo-hace)
+     - [🔍 Relación entre Optical Flow y Visual Odometry](#🔍-relación-entre-optical-flow-y-visual-odometry)
+   - [3️⃣ ¿Dónde entra SLAM? (ORB-SLAM, RTAB-Map)](#3️⃣-dónde-entra-slam-orb-slam-rtab-map)
+     - [🧱 ¿Qué añade SLAM sobre VO?](#🧱-qué-añade-slam-sobre-vo)
+     - [🧠 De flujo óptico a mapeo robusto: la progresión lógica](#🧠-de-flujo-óptico-a-mapeo-robusto-la-progresión-lógica)
+
+
 # 🧠 Práctica ROS 2: Odometría Visual con Optical Flow
 
 ## 🎯 Objetivo
@@ -146,3 +171,14 @@ Flujo Óptico
 Odometría Visual
    ↓
 SLAM (ej. ORB-SLAM, RTAB-Map)
+
+
+- Flujo óptico proporciona información local de movimiento.
+- Odometría visual acumula esa información para obtener una trayectoria.
+- SLAM refina la trayectoria, añade un mapa, y la hace robusta a errores y vueltas atrás.
+
+## ✅ Conclusión
+
+- El flujo óptico es la base para muchas estimaciones de movimiento visual.
+- La odometría visual permite construir trayectorias de cámara, pero tiene errores acumulativos.
+- SLAM (como ORB-SLAM o RTAB-Map) resuelve esos errores, añade mapeo y permite navegación autónoma fiable en entornos reales.
