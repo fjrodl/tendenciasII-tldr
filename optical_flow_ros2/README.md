@@ -70,3 +70,79 @@ Se crea un launch file que lanza tanto el nodo como RViz, configurado con vistas
 - Aplicación en drones o robots móviles reales.
 
 ---
+
+# 🔗 Del Flujo Óptico a la Odometría Visual y SLAM
+
+## 1️⃣ Flujo Óptico: el punto de partida
+
+El **flujo óptico** estima cómo se mueven los píxeles entre dos imágenes consecutivas.  
+Es útil para:
+
+- Detección de movimiento
+- Seguimiento de puntos
+- Estimación de velocidad aparente
+
+Sin embargo:
+
+- Solo proporciona **movimiento relativo local**
+- No conoce la **geometría 3D** ni la posición absoluta
+- No mantiene una **trayectoria acumulativa estable**
+
+---
+
+## 2️⃣ Odometría Visual: estimar el movimiento de la cámara
+
+La **odometría visual (Visual Odometry, VO)** es un paso más allá del flujo óptico.
+
+Su objetivo es:
+
+> Estimar la **pose (posición y orientación)** de la cámara a lo largo del tiempo, **integrando información visual entre múltiples fotogramas**.
+
+### 📷 ¿Cómo lo hace?
+
+- Detecta puntos clave (features) en imágenes sucesivas
+- Establece correspondencias (matches) entre esos puntos
+- Usa triangulación o PnP para estimar el movimiento entre imágenes
+- Integra estos desplazamientos en una trayectoria de la cámara
+
+📌 Algunos métodos de VO usan directamente **optical flow** (por ejemplo, KLT tracker) para seguir puntos clave entre fotogramas.
+
+---
+
+### 🔍 Relación entre Optical Flow y Visual Odometry
+
+| Concepto         | Optical Flow                      | Visual Odometry                       |
+|------------------|-----------------------------------|----------------------------------------|
+| Entrada          | Dos imágenes consecutivas         | Secuencia de imágenes                 |
+| Resultado        | Movimiento de píxeles             | Pose de la cámara                     |
+| Tipo de salida   | Campo de vectores 2D              | Transformación 3D (R, t)              |
+| Dependencias     | Gradientes locales                | Geometría de la cámara                |
+| Uso de features  | Opcional (denso o escaso)         | Generalmente usa puntos clave         |
+| Precisión        | Local                             | Global (a corto plazo)                |
+
+---
+
+## 3️⃣ ¿Dónde entra SLAM? (ORB-SLAM, RTAB-Map)
+
+El problema de la odometría visual es que **acumula error** con el tiempo (deriva).  
+Ahí es donde entra **SLAM (Simultaneous Localization and Mapping)**:
+
+> SLAM no solo estima la trayectoria de la cámara (como VO), sino que también **construye un mapa** del entorno y corrige errores mediante **cerrado de bucles** y **relocalización**.
+
+### 🧱 ¿Qué añade SLAM sobre VO?
+
+- 🗺️ **Mapa del entorno**
+- 🔁 **Cierre de bucles** para reducir error acumulado
+- 📍 **Re-localización** en zonas ya visitadas
+- 🔧 **Optimización global** de la trayectoria
+
+---
+
+## 🧠 De flujo óptico a mapeo robusto: la progresión lógica
+
+```text
+Flujo Óptico
+   ↓
+Odometría Visual
+   ↓
+SLAM (ej. ORB-SLAM, RTAB-Map)
