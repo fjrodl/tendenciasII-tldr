@@ -14,13 +14,13 @@
 5. [📈 Limitaciones conocidas](#-limitaciones-conocidas)
 6. [🧩 Extensiones posibles](#-extensiones-posibles)
 7. [🔗 Del Flujo Óptico a la Odometría Visual y SLAM](#-del-flujo-óptico-a-la-odometría-visual-y-slam)
-   - [1️⃣ Flujo Óptico: el punto de partida](#1️⃣-flujo-óptico-el-punto-de-partida)
-   - [2️⃣ Odometría Visual: estimar el movimiento de la cámara](#2️⃣-odometría-visual-estimar-el-movimiento-de-la-cámara)
-     - [📷 ¿Cómo lo hace?](#📷-cómo-lo-hace)
-     - [🔍 Relación entre Optical Flow y Visual Odometry](#🔍-relación-entre-optical-flow-y-visual-odometry)
-   - [3️⃣ ¿Dónde entra SLAM? (ORB-SLAM, RTAB-Map)](#3️⃣-dónde-entra-slam-orb-slam-rtab-map)
-     - [🧱 ¿Qué añade SLAM sobre VO?](#🧱-qué-añade-slam-sobre-vo)
-     - [🧠 De flujo óptico a mapeo robusto: la progresión lógica](#🧠-de-flujo-óptico-a-mapeo-robusto-la-progresión-lógica)
+   - [1️⃣ Flujo Óptico: el punto de partida](#-flujo-óptico-el-punto-de-partida)
+   - [2️⃣ Odometría Visual: estimar el movimiento de la cámara](#-odometría-visual-estimar-el-movimiento-de-la-cámara)
+     - [📷 ¿Cómo lo hace?](#-cómo-lo-hace)
+     - [🔍 Relación entre Optical Flow y Visual Odometry](#-relación-entre-optical-flow-y-visual-odometry)
+   - [3️⃣ ¿Dónde entra SLAM? (ORB-SLAM, RTAB-Map)](#-dónde-entra-slam-orb-slam-rtab-map)
+     - [🧱 ¿Qué añade SLAM sobre VO?](#-qué-añade-slam-sobre-vo)
+     - [🧠 De flujo óptico a mapeo robusto: la progresión lógica](#-de-flujo-óptico-a-mapeo-robusto-la-progresión-lógica)
 
 
 # 🧠 Práctica ROS 2: Odometría Visual con Optical Flow
@@ -171,6 +171,7 @@ Flujo Óptico
 Odometría Visual
    ↓
 SLAM (ej. ORB-SLAM, RTAB-Map)
+```
 
 
 - Flujo óptico proporciona información local de movimiento.
