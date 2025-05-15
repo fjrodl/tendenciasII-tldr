@@ -69,6 +69,64 @@ Donde:
 
 Esta ecuación no tiene solución única (un punto, dos incógnitas). Lucas-Kanade resuelve este problema utilizando **una ventana de vecindad (por ejemplo, 5x5 píxeles)** y asumiendo que todos los píxeles dentro de esa ventana tienen el mismo movimiento.
 
+
+### 📐 Interpretación de los términos en la ecuación del flujo óptico
+
+La ecuación diferencial del flujo óptico es:
+
+\[
+\frac{\partial I}{\partial x} \cdot V_x + \frac{\partial I}{\partial y} \cdot V_y + \frac{\partial I}{\partial t} = 0
+\]
+
+Cada uno de estos términos tiene un significado físico importante:
+
+---
+
+#### 🧭 \( (V_x, V_y) \): Componentes del flujo óptico
+
+- Representan la **velocidad aparente** de movimiento de los píxeles en la imagen.
+- \( V_x \): movimiento horizontal (en el eje X) del píxel entre dos fotogramas.
+- \( V_y \): movimiento vertical (en el eje Y) del píxel entre dos fotogramas.
+- Estas componentes son precisamente lo que queremos estimar con los métodos de flujo óptico.
+- El vector \( \vec{V} = (V_x, V_y) \) describe la dirección y magnitud del movimiento.
+
+---
+
+#### 🧮 \( \frac{\partial I}{\partial x}, \frac{\partial I}{\partial y} \): Gradientes espaciales
+
+- Indican cómo cambia la **intensidad de la imagen** en las direcciones X e Y.
+- Se calculan derivando la imagen con respecto a sus coordenadas espaciales.
+- Un gradiente alto implica un borde o cambio brusco de color o intensidad.
+- Estos gradientes nos dicen cómo afecta el desplazamiento espacial al valor de los píxeles.
+
+**Ejemplo:**  
+Un borde vertical en la imagen tendrá un gradiente alto en \( \frac{\partial I}{\partial x} \), y bajo en \( \frac{\partial I}{\partial y} \).
+
+---
+
+#### ⏱️ \( \frac{\partial I}{\partial t} \): Gradiente temporal
+
+- Mide el cambio de **intensidad** del mismo píxel entre dos fotogramas consecutivos.
+- Esencial para detectar movimiento: si un píxel cambia mucho entre dos imágenes, es probable que haya movimiento.
+- Se calcula como la diferencia de intensidad entre el fotograma actual y el anterior:
+
+\[
+\frac{\partial I}{\partial t} \approx I(x, y, t+1) - I(x, y, t)
+\]
+
+- Si el píxel no ha cambiado de posición, su intensidad debería ser la misma (según el supuesto de **constancia del brillo**).
+
+---
+
+### 🔁 Relación entre todos los términos
+
+- Los gradientes espaciales (\( \frac{\partial I}{\partial x}, \frac{\partial I}{\partial y} \)) indican **cómo varía la imagen localmente**.
+- El gradiente temporal (\( \frac{\partial I}{\partial t} \)) indica **cómo ha cambiado con el tiempo**.
+- El flujo óptico (\( V_x, V_y \)) es la incógnita que hace que la combinación lineal de estos cambios **sume cero**, bajo el supuesto de que el contenido visual se ha desplazado, pero no modificado.
+
+Esta ecuación se usa como base para estimar el movimiento en muchas técnicas de visión artificial.
+
+
 ---
 
 ### 🧮 Solución por mínimos cuadrados
